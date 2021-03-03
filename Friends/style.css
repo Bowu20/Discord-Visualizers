@@ -1,0 +1,44 @@
+body {
+    background-color: #2C2F33;
+    color: white;
+    font-family: Whitney, "Helvetica Neue", Helvetica, Arial, sans-serif;;
+}
+a {
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline #23272A;
+}
+.g {
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+    "gAvatar gData";
+}
+
+.gAvatar {
+    grid-area: gAvatar;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 10px;
+}
+.gAvatar a {
+    cursor: default;
+}
+.gAvatar img {
+    transition: all 1s ease-in-out;
+    background-color: transparent;
+    border-radius: 100%;
+}
+.gAvatar:hover img {
+    transition: all 1s ease-in-out;
+    background-color: #7289DA;
+    border-radius: 5%;
+}
+
+.gData {
+    grid-area: gData;
+}

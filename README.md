@@ -1,1 +1,3 @@
 # Discord-Visualizers
+
+## [Friends](./Friends)
