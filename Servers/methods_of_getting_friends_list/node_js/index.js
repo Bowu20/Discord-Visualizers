@@ -9,7 +9,7 @@ const options = {
     "method": "GET",
     "hostname": "discord.com",
     "port": null,
-    "path": "/api/v8/users/@me/relationships",
+    "path": "/api/v8/users/@me/guilds",
     "headers": {
         "authority": "discord.com",
         "authorization": TOKEN_GOES_HERE,

@@ -30,6 +30,12 @@ try {
     ob_start("sanitize_output");
 
 
+    /**
+     * @param $id
+     * @param $avatar
+     * @param int $size
+     * @return string
+     */
     function generateAvatarURL($id, $avatar, $size = 128)
     {
         if ($avatar == null) {
@@ -120,7 +126,7 @@ try {
                 $avatarSize = 128;
                 echo "\n" . "<div class='g'>";
                 echo sprintf("\n<div class='gAvatar' id='%s'><a href='#%s'>", $user->id, $user->id);
-                echo sprintf(" class='lazy u-img' width='%d' height='%d' alt='avatar'>", generateAvatarURL($user->id, $user->avatar, $avatarSize), $avatarSize, $avatarSize);
+                echo sprintf("<img src=\"%s\" data-src=\"%s\" class='lazy u-img' width='%d' height='%d' alt='avatar'>", generateAvatarURL(null, null, $avatarSize), generateAvatarURL($user->id, $user->avatar, $avatarSize), $avatarSize, $avatarSize);
                 echo "\n" . "</a></div>";
                 echo "\n" . "<div class='gData'>";
                 echo sprintf("\n<h1 class='u-tag'>UserTag: <span>%s</span> <a target='_blank' href=\"%s\">🔍</a></h1>", he($userTag), generateGoogleLookup($userTag));
