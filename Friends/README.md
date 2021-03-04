@@ -3,7 +3,6 @@
 The files you need to run this locally:
 - [index.php](./index.php)
 - [style.css](./style.css)
-- [placeholder-avatar.png](./placeholder-avatar.png)
 - [intersection-observer.min.js](./intersection-observer.min.js)
 - [lazyload.min.js](./lazyload.min.js)
 - [other.js](./other.js)

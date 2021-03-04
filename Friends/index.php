@@ -1,4 +1,5 @@
 <?php
+const SAVE_BUTTON_ENABLED = true;
 try {
     function disableDarkReader()
     {
@@ -40,11 +41,11 @@ try {
     {
         if ($avatar == null) {
             $array = [
-                "https://discordapp.com/assets/322c936a8c8be1b803cd94861bdfa868.png",
-                "https://discordapp.com/assets/dd4dbc0016779df1378e7812eabaa04d.png",
+//                "https://discordapp.com/assets/322c936a8c8be1b803cd94861bdfa868.png",
+//                "https://discordapp.com/assets/dd4dbc0016779df1378e7812eabaa04d.png",
                 "https://discordapp.com/assets/6debd47ed13483642cf09e832ed0bc1b.png",
-                "https://discordapp.com/assets/1cbd08c76f8af6dddce02c5138971129.png",
-                "https://discordapp.com/assets/0e291f67c9274a1abdddeb3fd919cbaa.png",
+//                "https://discordapp.com/assets/1cbd08c76f8af6dddce02c5138971129.png",
+//                "https://discordapp.com/assets/0e291f67c9274a1abdddeb3fd919cbaa.png",
             ];
             return $array[array_rand($array, 1)];
         }
@@ -98,7 +99,9 @@ try {
     <meta charset=\"UTF-8\">
     <meta name=\"viewport\"
           content=\"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0\">
-    <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\n";
+    <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\n
+    <title>Relationships Saved | ".count($parsed_contents)."</title>\n
+    <link rel='preload' as='image' href='https://discordapp.com/assets/6debd47ed13483642cf09e832ed0bc1b.png'>\n";
             echo "<style>" . file_get_contents("style.css") . "</style>";
             if ($_POST["type"] === "2col") {
                 $c = 2;
@@ -114,9 +117,8 @@ try {
 }</style>";
             }
             echo "<script>" . file_get_contents("intersection-observer.min.js") . "\n\n" . file_get_contents("lazyload.min.js") . "\n\n" . file_get_contents("other.js") . "</script>";
-            echo "
-</head>
-<body><button class='save' style='grid-column: 1 / -1; font-size: 24px; display: none;'>save</button>";
+            echo "</head>\n<body>";
+            if (SAVE_BUTTON_ENABLED) echo "<button class='save' style='grid-column: 1 / -1; font-size: 24px; display: none;'>save</button>";
             usort($parsed_contents, function ($a, $b) {
                 return strcmp($a->user->username, $b->user->username);
             });
@@ -126,7 +128,11 @@ try {
                 $avatarSize = 128;
                 echo "\n" . "<div class='g'>";
                 echo sprintf("\n<div class='gAvatar' id='%s'><a href='#%s'>", $user->id, $user->id);
-                echo sprintf("<img src=\"%s\" data-src=\"%s\" class='lazy u-img' width='%d' height='%d' alt='avatar'>", generateAvatarURL(null, null, $avatarSize), generateAvatarURL($user->id, $user->avatar, $avatarSize), $avatarSize, $avatarSize);
+                if ($user->avatar==null) {
+                    echo sprintf("<img src=\"%s\" class='u-img' width='%d' height='%d' alt='avatar'>", generateAvatarURL(null, null, $avatarSize), $avatarSize, $avatarSize);
+                } else {
+                    echo sprintf("<img src=\"%s\" data-src=\"%s\" class='lazy u-img' width='%d' height='%d' alt='avatar'>", generateAvatarURL(null, null, $avatarSize), generateAvatarURL($user->id, $user->avatar, $avatarSize), $avatarSize, $avatarSize);
+                }
                 echo "\n" . "</a></div>";
                 echo "\n" . "<div class='gData'>";
                 echo sprintf("\n<h1 class='u-tag'>UserTag: <span>%s</span> <a target='_blank' href=\"%s\">🔍</a></h1>", he($userTag), generateGoogleLookup($userTag));
@@ -136,7 +142,7 @@ try {
                 echo "\n" . "</div>";
             }
             echo "<script>lazyLoadInstance.update();</script>";
-            echo "<script>var savebtn = document.querySelector('.save');if(location.host!=='') {" . file_get_contents("download.min.js") . ";savebtn.onclick=function(){download(document.documentElement.outerHTML, 'dlFriendsList.html', 'text/html');};savebtn.style.display='';}else {savebtn.remove();}</script>";
+            if (SAVE_BUTTON_ENABLED) echo "<script>var savebtn = document.querySelector('.save');if(location.host!=='') {" . file_get_contents("download.min.js") . ";savebtn.onclick=function(){download(document.documentElement.outerHTML, 'dlFriendsList.html', 'text/html');};savebtn.style.display='';}else {savebtn.remove();}</script>";
             echo "
 </body>
 </html>";
@@ -167,7 +173,6 @@ try {
         echo "<li><a href='source.php'>index.php</a></li>";
         $filesNeeded = [
             "style.css",
-            "placeholder-avatar.png",
             "intersection-observer.min.js",
             "lazyload.min.js",
             "other.js",
