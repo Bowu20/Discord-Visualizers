@@ -136,7 +136,7 @@ try {
                 echo "\n" . "</div>";
             }
             echo "<script>lazyLoadInstance.update();</script>";
-            echo "<script>var savebtn = document.querySelector('.save');if(location.host==='bowu20.online') {" . file_get_contents("download.min.js") . ";savebtn.onclick=function(){download(document.documentElement.outerHTML, 'dlFriendsList.html', 'text/html');};savebtn.style.display='';}else {savebtn.remove();}</script>";
+            echo "<script>var savebtn = document.querySelector('.save');if(location.host!=='') {" . file_get_contents("download.min.js") . ";savebtn.onclick=function(){download(document.documentElement.outerHTML, 'dlFriendsList.html', 'text/html');};savebtn.style.display='';}else {savebtn.remove();}</script>";
             echo "
 </body>
 </html>";
